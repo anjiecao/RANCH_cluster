@@ -2,6 +2,7 @@ import pandas as pd
 import gc
 import torch 
 import datetime
+from datetime import datetime
 import pickle
 # This is the driver file for interacting with the model 
 # each run would run the simulation specified in 1 row in param_info and 1 row in trial_info
@@ -93,7 +94,7 @@ def run_trial(param_info, trial_info):
 
         
         curr_time = datetime.now()
-        timestr = curr_time.strftime('%m-%d-%H:%M:%S.%f')[:-3] + "-" + stim_set + "-" + paradigm
+        timestr = curr_time.strftime('%m-%d-%H:%M:%S.%f')[:-3] 
         
         batch_name = "cache_results/{t}.pickle".format(t = timestr)
         with open(batch_name, 'wb') as f:
