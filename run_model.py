@@ -2,7 +2,7 @@ import pandas as pd
 # This is the driver file for interacting with the model 
 # each run would run the simulation specified in 1 row in param_info and 1 row in trial_info
 
-from utils import get_jitter_grid
+from utils import get_jitter_grid, get_embedding
 
 
 def run_trial(param_info, trial_info): 
@@ -11,10 +11,11 @@ def run_trial(param_info, trial_info):
 
     # Data structure prepping: 
     # 1. Genereate all the grids used 
-    all_jitter_grid = get_jitter_grid.generate_jitter_grid(param_info)
-    print(all_jitter_grid["grid_mus"])
+    all_jitter_grid = get_jitter_grid.generate_jitter_grid(param_info=param_info)
     
     # 2. Convert Stimuli_info into actual embedding 
+    b, d = get_embedding.string_to_embedding(trial_info=trial_info)
+    print(b, d)
     
 
 
