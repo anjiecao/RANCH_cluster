@@ -30,7 +30,6 @@ def run_trial(param_info, trial_info):
     
     # 3. Convert trial information into sequence
     sequence_scheme = get_sequence.param_to_scheme(trial_info=trial_info)
-
     # ------ Set up simulation raw material ------ #
     # 4. Set up stimuli
     s = init_stimuli_tensor.granch_stimuli(trial_info["feature_n"], sequence_scheme)
@@ -76,19 +75,24 @@ def run_trial(param_info, trial_info):
 
 
             if model_type == "EIG":
-                res = main_sim_tensor.granch_main_simulation(params, tensor_model, s)
+                model = main_sim_tensor.granch_main_simulation(params, tensor_model, s)
             elif model_type == "KL":
-                res = proxy_sim.granch_proxy_sim(params, tensor_model, s)
+                model = proxy_sim.granch_proxy_sim(params, tensor_model, s)
             elif model_type == "surprisal": 
-                res = proxy_sim.granch_proxy_sim(params, tensor_model, s)
+                model = proxy_sim.granch_proxy_sim(params, tensor_model, s)
             elif model_type == "no_learning": 
-                res = lesioned_sim.granch_no_learning_simulation(params, tensor_model, s)
+                model = lesioned_sim.granch_no_learning_simulation(params, tensor_model, s)
             elif model_type == "no_noise": 
-                res = lesioned_sim.granch_no_noise_simulation(params, tensor_model, s) 
+                model = lesioned_sim.granch_no_noise_simulation(params, tensor_model, s) 
 
-            b = res.behavior
+            # output 
+            res = model.output
+            res["param_id"] = param_info["param_id"]
+            res["trial_id"] = trial_info["trial_id"]
+            # uncomment below to store EIG information
+            #res = model.behavior
         
-            res_df = pd.concat([res_df, b])
+            res_df = pd.concat([res_df, res])
 
         
         curr_time = datetime.now()
@@ -115,7 +119,7 @@ def run_sim(param_info_path, trial_info_path):
     trial_info = pd.read_csv(trial_info_path)
 
     # testing: 
-    trial_info = trial_info.head(1)
+    trial_info = trial_info.tail(1)
 
     # loop through trial_info 
     for index, row in trial_info.iterrows():
