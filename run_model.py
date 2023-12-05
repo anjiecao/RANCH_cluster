@@ -26,7 +26,7 @@ def run_trial(param_info, trial_info):
     all_jitter_grid = get_jitter_grid.generate_jitter_grid(param_info=param_info)
     
     # 2. Convert Stimuli_info into actual embedding 
-    b, d = get_embedding.string_to_embedding(trial_info=trial_info)
+    fam, test = get_embedding.string_to_embedding(trial_info=trial_info)
     
     # 3. Convert trial information into sequence
     sequence_scheme = get_sequence.param_to_scheme(trial_info=trial_info)
@@ -34,14 +34,13 @@ def run_trial(param_info, trial_info):
     # ------ Set up simulation raw material ------ #
     # 4. Set up stimuli
     s = init_stimuli_tensor.granch_stimuli(trial_info["feature_n"], sequence_scheme)
-    s.add_stimuli_sequence(b, d)
+    s.add_stimuli_sequence(fam, test)
 
     # 5. Set up the parameter
-    params = init_params_tensor
-
 
     # ------ Run simulation for one sequence ------ #
     # this is to loop through all the jitter grid 
+
     for b_i in range(0, param_info["batch_n"]): 
         res_df = pd.DataFrame()
         for i in range(0,param_info["jitter_n"]): 
@@ -74,7 +73,6 @@ def run_trial(param_info, trial_info):
             params.add_lp_epsilon()
             params.add_priors()
             
-            print("??")
 
 
             if model_type == "EIG":
@@ -117,7 +115,7 @@ def run_sim(param_info_path, trial_info_path):
     trial_info = pd.read_csv(trial_info_path)
 
     # testing: 
-    trial_info = trial_info.head(10)
+    trial_info = trial_info.head(1)
 
     # loop through trial_info 
     for index, row in trial_info.iterrows():
@@ -125,4 +123,4 @@ def run_sim(param_info_path, trial_info_path):
 
 
 run_sim(param_info_path="sim_info/param_info/eig.csv", 
-        trial_info_path="sim_info/trial_info/fake_trial_info.csv")
+        trial_info_path="sim_info/trial_info/trial_info.csv")

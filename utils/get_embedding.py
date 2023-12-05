@@ -6,8 +6,8 @@ def string_to_embedding(trial_info):
    # loading all the key information
    embedding_type = trial_info["embedding_type"]
    feature_n = trial_info["feature_n"]
-   background = trial_info['background'] 
-   deviant = trial_info['deviant']
+   fam = trial_info['fam'] 
+   test = trial_info['test']
 
 
    # loading the corresponding embedding file
@@ -16,13 +16,13 @@ def string_to_embedding(trial_info):
    elif embedding_type == "resnet_saycam":
       embeddings = pd.read_csv("../sim_info/embeddings/resnet_pa.csv")
 
-   background_raw = embeddings[embeddings.iloc[:,0] == background]
-   deviant_raw =  embeddings[embeddings.iloc[:,0] == deviant]
+   fam_raw = embeddings[embeddings.iloc[:,0] == fam]
+   test_raw =  embeddings[embeddings.iloc[:,0] == test]
 
-   b_val = torch.tensor(background_raw.iloc[:, 1:feature_n+1].values[0])
-   d_val = torch.tensor(deviant_raw.iloc[:, 1:feature_n+1].values[0])
+   f_val = torch.tensor(fam_raw.iloc[:, 1:feature_n+1].values[0])
+   t_val = torch.tensor(test_raw.iloc[:, 1:feature_n+1].values[0])
 
-   return (b_val, d_val)
+   return (f_val, t_val)
 
 
 
