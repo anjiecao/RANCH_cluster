@@ -105,13 +105,6 @@ def run_trial(param_info, trial_info):
         gc.collect()
 
 
-    
-
-
-
-
-
-
 # This is a place holder to test the run_trial
 def run_sim(param_info_path, trial_info_path): 
     # read in the two files: 
