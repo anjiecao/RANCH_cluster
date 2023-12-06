@@ -1,15 +1,23 @@
 
-def populate_dir(args):
+import argparse
+import os
+import pandas as pd
 
-# first empty param dir
+def populate_dir(args):
+    
+    # first empty param dir
+    param_path = 'RANCH_cluster/MIT_tools/param_dir/'
+    files = os.listdir(param_path)
+
+    for f in files:
+        os.remove(param_path + f)
 
     # read csv
-    pd.read_csv('')
+    param_info = pd.read_csv(args.param_info_path)
 
-
-# get one row and create csv in param_dir
-
-
+    # get one row and create csv in param_dir
+    for i in range(param_info.shape[0]):
+        param_info.iloc[i].to_csv('RANCH_cluster/MIT_tools/param_dir/param_info_' + str(i) + '.csv', index=False)
 
 
 if __name__ == '__main__':

@@ -4,16 +4,18 @@ import torch
 import datetime
 from datetime import datetime
 import pickle
+import argparse
+import ipdb
+
 # This is the driver file for interacting with the model 
 # each run would run the simulation specified in 1 row in param_info and 1 row in trial_info
 from utils import get_jitter_grid, get_embedding, get_sequence
 
 # better way to do this? 
 import sys
-sys.path.append('/Users/caoanjie/Desktop/projects/RANCH_model')
+sys.path.append('/om2/scratch/tmp/galraz/RANCH/RANCH_model')
 from granch_utils import init_stimuli_tensor, init_params_tensor, init_model_tensor
 from granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
-
 
 def run_trial(param_info, trial_info): 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -105,11 +107,13 @@ def run_trial(param_info, trial_info):
         gc.collect()
 
 
+
+
 # This is a place holder to test the run_trial
-def run_sim(param_info_path, trial_info_path): 
+def run_sim(args): 
     # read in the two files: 
-    param_info = pd.read_csv(param_info_path)
-    trial_info = pd.read_csv(trial_info_path)
+    param_info = pd.read_csv(args.param_info_path)
+    trial_info = pd.read_csv(args.trial_info_path)
 
     # testing: 
     trial_info = trial_info.tail(1)
@@ -119,5 +123,10 @@ def run_sim(param_info_path, trial_info_path):
         run_trial(param_info = param_info.iloc[0], trial_info = row)
 
 
-run_sim(param_info_path="sim_info/param_info/eig.csv", 
-        trial_info_path="sim_info/trial_info/trial_info.csv")
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("param_info_path", type=str, help="Path to csv with parameters")
+    parser.add_argument("trial_info_path", type=str, help="Path to trial_info csv")
+
+    args = parser.parse_args()
+    run_sim(args)
