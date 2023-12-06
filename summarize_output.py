@@ -22,8 +22,6 @@ def read_and_concatenate_pickles(folder_path):
 
     return concatenated_df
 
-
-
 # Specify the folder path containing pickle files
 folder_path = 'cache_results'
 all_files = os.listdir(folder_path)

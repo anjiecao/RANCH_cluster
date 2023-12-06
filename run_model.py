@@ -1,18 +1,14 @@
-import pandas as pd
 import gc
 import torch 
 import datetime
 from datetime import datetime
 import pickle
-# This is the driver file for interacting with the model 
-# each run would run the simulation specified in 1 row in param_info and 1 row in trial_info
-from utils import get_jitter_grid, get_embedding, get_sequence
+
+from .utils import get_jitter_grid, get_embedding, get_sequence
 
 # better way to do this? 
-import sys
-sys.path.append('/Users/caoanjie/Desktop/projects/RANCH_model')
-from granch_utils import init_stimuli_tensor, init_params_tensor, init_model_tensor
-from granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
+from ..RANCH_model.granch_utils import init_stimuli_tensor, init_params_tensor, init_model_tensor
+from ..RANCH_model.granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
 
 
 def run_trial(param_info, trial_info): 

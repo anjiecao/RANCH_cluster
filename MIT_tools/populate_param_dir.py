@@ -16,9 +16,8 @@ def populate_dir(args):
     param_info = pd.read_csv(args.param_info_path)
 
     # get one row and create csv in param_dir
-    for i in range(param_info.shape[0]):
-        param_info.iloc[i].to_csv('RANCH_cluster/MIT_tools/param_dir/param_info_' + str(i) + '.csv', index=False)
-
+    for index, row in param_info.iterrows():
+        param_info.iloc[[index]].to_csv(param_path + str(index) + '.csv', index=False)
 
 if __name__ == '__main__':
     print('entered main script')
