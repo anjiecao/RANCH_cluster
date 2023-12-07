@@ -1,4 +1,4 @@
-,embedding_type,feature_n,fam_duration,test_type,trial_ID,fam,test,violation_type,stim_ID
+,embedding_type,feature_n,fam_duration,test_type,trial_id,fam,test,violation_type,stim_id
 24,resnet_pa,3,0,fam,0,animate_001_left.png,animate_001_left.png,background,24
 25,resnet_pa,3,0,fam,0,animate_002_left.png,animate_002_left.png,background,25
 26,resnet_pa,3,0,fam,0,animate_001_right.png,animate_001_right.png,background,26

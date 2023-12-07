@@ -3,12 +3,13 @@ import torch
 import datetime
 from datetime import datetime
 import pickle
+import pandas as pd
 
 from .utils import get_jitter_grid, get_embedding, get_sequence
 
 # better way to do this? 
-from ..RANCH_model.granch_utils import init_stimuli_tensor, init_params_tensor, init_model_tensor
-from ..RANCH_model.granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
+from RANCH_model.granch_utils import init_stimuli_tensor, init_params_tensor, init_model_tensor
+from RANCH_model.granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
 
 
 def run_trial(param_info, trial_info): 
@@ -85,6 +86,7 @@ def run_trial(param_info, trial_info):
             res = model.output
             res["param_id"] = param_info["param_id"]
             res["trial_id"] = trial_info["trial_id"]
+            res["stim_id"] = trial_info['stim_id']
             # uncomment below to store EIG information
             #res = model.behavior
         
@@ -94,7 +96,7 @@ def run_trial(param_info, trial_info):
         curr_time = datetime.now()
         timestr = curr_time.strftime('%m-%d-%H:%M:%S.%f')[:-3] 
         
-        batch_name = "cache_results/{t}.pickle".format(t = timestr)
+        batch_name = "RANCH_cluster/cache_results/{t}.pickle".format(t = timestr)
         with open(batch_name, 'wb') as f:
             pickle.dump(res_df, f)
         del res_df
@@ -115,5 +117,5 @@ def run_sim(param_info_path, trial_info_path):
         run_trial(param_info = param_info.iloc[0], trial_info = row)
 
 
-run_sim(param_info_path="sim_info/param_info/eig.csv", 
-        trial_info_path="sim_info/trial_info/trial_info.csv")
+#run_sim(param_info_path="sim_info/param_info/eig.csv", 
+ #       trial_info_path="sim_info/trial_info/trial_info.csv")
