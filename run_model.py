@@ -4,6 +4,7 @@ import datetime
 from datetime import datetime
 import pickle
 import pandas as pd
+import ipdb
 
 from .utils import get_jitter_grid, get_embedding, get_sequence
 
@@ -114,8 +115,9 @@ def run_sim(param_info_path, trial_info_path):
 
     # loop through trial_info 
     for index, row in trial_info.iterrows():
+
         run_trial(param_info = param_info.iloc[0], trial_info = row)
 
 
-#run_sim(param_info_path="sim_info/param_info/eig.csv", 
- #       trial_info_path="sim_info/trial_info/trial_info.csv")
+# run_sim(param_info_path="RANCH_cluster/sim_info/param_info/eig.csv", 
+#        trial_info_path="RANCH_cluster/sim_info/trial_info/trial_info.csv")

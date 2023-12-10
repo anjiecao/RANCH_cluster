@@ -1,16 +1,29 @@
 from .. import run_model
 import pandas as pd
 import argparse
+import ipdb
+import os
 
 def run_MIT_model(args):
 
+    param_names = ['param_id', 'linking_hypothesis', 'mu_prior',
+       'hypothetical_obs_grid_n', 'max_observation', 'batch_n', 'jitter_n',
+       'quad_a', 'quad_b', 'quad_c', 'V_prior', 'alpha_prior', 'beta_prior',
+       'epsilon', 'mu_epsilon', 'sd_epsilon', 'world_EIGs',
+       'forced_exposure_max']
+        
     params = pd.read_csv(args.param_info_path)
+
+    # make params from list of values to pandas series with param_names as index
+    params = pd.Series(params.values[0], index = param_names)
+
+    # read trial info
     trials = pd.read_csv(args.trial_info_path)
     
-    # process params and trials so that run_trial can read them
+    for _, row in trials.iterrows():
 
-
-    run_model.run_trial(params, trials)
+        # run model
+        run_model.run_trial(param_info = params, trial_info = row)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

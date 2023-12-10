@@ -10,10 +10,10 @@
 
 project_path=$1
 params=("${@:2}")
-trial_info="RANCH_cluster/sim_info/param_info/trial_info.csv"
+trial_info="RANCH_cluster/sim_info/trial_info/trial_info.csv"
 current_param_values=${params[${SLURM_ARRAY_TASK_ID}]}
 
-cmd="python -m RANCH.RANCH_cluster.MIT_tools.run_MIT_cluster_model.py $current_param_values $trial_info" 
+cmd="python -m RANCH_cluster.MIT_tools.run_MIT_cluster_model $current_param_values $trial_info"
 
 echo $cmd 
 
