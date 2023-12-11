@@ -148,7 +148,11 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# remove all the pickle file
 /cache_results/*
+
+# remove summarized output
+*.csv
 
 # PyCharm
 #  JetBrains specific template is maintainted in a separate JetBrains.gitignore that can

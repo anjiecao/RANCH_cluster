@@ -1,5 +1,7 @@
 import pandas as pd
 import os
+import ipdb
+import argparse 
 
 def read_and_concatenate_pickles(folder_path):
     # List all files in the folder
@@ -15,6 +17,12 @@ def read_and_concatenate_pickles(folder_path):
     for file in pickle_files:
         file_path = os.path.join(folder_path, file)
         df = pd.read_pickle(file_path)
+        
+        # summarize df by taking mean and std of n_samples, while retaining the other columns
+        df = df.groupby(['trial_id', 'stim_id', 'param_id']).agg({'sample_n': ['mean', 'std']})
+        df.columns = ['_'.join(col).strip() for col in df.columns.values]
+        df = df.reset_index()
+
         df_list.append(df)
 
     # Concatenate all DataFrames into one
@@ -22,11 +30,10 @@ def read_and_concatenate_pickles(folder_path):
 
     return concatenated_df
 
-# Specify the folder path containing pickle files
-folder_path = 'cache_results'
-all_files = os.listdir(folder_path)
-# Call the function and get the concatenated DataFrame
-result_df = read_and_concatenate_pickles(folder_path)
-
-# Displaying the resulting DataFrame
-print(result_df)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("input_folder_path", type=str, help="Path to sim results")
+    parser.add_argument("output_path", type=str, help="Path to sim results")
+    args = parser.parse_args()    
+    result_df = read_and_concatenate_pickles(args.input_folder_path)
+    result_df.to_csv(args.output_path, index=False)
