@@ -1,0 +1,2 @@
+param_id,linking_hypothesis,mu_prior,hypothetical_obs_grid_n,max_observation,batch_n,jitter_n,quad_a,quad_b,quad_c,V_prior,alpha_prior,beta_prior,epsilon,mu_epsilon,sd_epsilon,world_EIGs,forced_exposure_max
+129,EIG,0,5,500,20,20,999,999,999,3,1.0,0.1,0.0001,0.001,0.5,1e-05,5
