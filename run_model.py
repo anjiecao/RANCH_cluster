@@ -103,21 +103,3 @@ def run_trial(param_info, trial_info):
         del res_df
         gc.collect()
 
-
-# This is a place holder to test the run_trial
-def run_sim(param_info_path, trial_info_path): 
-    # read in the two files: 
-    param_info = pd.read_csv(param_info_path)
-    trial_info = pd.read_csv(trial_info_path)
-
-    # testing: 
-    trial_info = trial_info.tail(1)
-
-    # loop through trial_info 
-    for index, row in trial_info.iterrows():
-
-        run_trial(param_info = param_info.iloc[0], trial_info = row)
-
-
-# run_sim(param_info_path="RANCH_cluster/sim_info/param_info/eig.csv", 
-#        trial_info_path="RANCH_cluster/sim_info/trial_info/trial_info.csv")
