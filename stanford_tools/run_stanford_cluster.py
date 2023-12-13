@@ -10,11 +10,12 @@ def run_Stanford_model(args):
     trial_info = pd.read_csv(args.trial_info_path)
 
     # testing: 
-    trial_info = trial_info.tail(1)
+    #trial_info = trial_info.tail(1)
 
     # loop through trial_info 
-    for index, row in trial_info.iterrows():
-        run_model.run_trial(param_info = param_info.iloc[0], trial_info = row)
+    for trial_index, trial_row in trial_info.iterrows():
+        for param_index, param_row in param_info.iterrows():
+                run_model.run_trial(param_info = param_row, trial_info = trial_row)
 
 
 
