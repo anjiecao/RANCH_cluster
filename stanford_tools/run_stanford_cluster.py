@@ -10,7 +10,8 @@ def run_Stanford_model(args):
     trial_info = pd.read_csv(args.trial_info_path)
 
     # testing: 
-    #trial_info = trial_info.tail(1)
+    # filter the models -- take 1 stimuli pair on each param id
+    trial_info = trial_info.groupby('trial_id').sample(n=1)
 
     # loop through trial_info 
     for trial_index, trial_row in trial_info.iterrows():
