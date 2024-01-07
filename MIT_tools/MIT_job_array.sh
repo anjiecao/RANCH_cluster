@@ -2,7 +2,7 @@
 
 project_path="/om2/scratch/tmp/galraz/RANCH/RANCH_cluster"
 
-param_info=$project_path/sim_info/param_info/eig.csv
+param_info=$project_path/sim_info/param_info/KL.csv
 param_dir=$project_path/MIT_tools/param_dir
 
 # code that takes eig.csv and creates different files for each row
