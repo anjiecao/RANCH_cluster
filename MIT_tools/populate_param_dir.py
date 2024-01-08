@@ -7,7 +7,7 @@ import ipdb
 def populate_dir(args):
     
     # first empty param dir
-    param_path = 'RANCH_cluster/MIT_tools/param_dir/'
+    param_path = 'RANCH_cluster/MIT_tools/test_param_dir/'
     files = os.listdir(param_path)
 
     for f in files:

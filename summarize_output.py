@@ -17,9 +17,13 @@ def read_and_concatenate_pickles(folder_path):
     for file in pickle_files:
         file_path = os.path.join(folder_path, file)
         df = pd.read_pickle(file_path)
+
+        ipdb.set_trace()
         
         # summarize df by taking mean and std of n_samples, while retaining the other columns
-        df = df.groupby(['trial_id', 'stim_id', 'param_id']).agg({'sample_n': ['mean', 'std']})
+        df = df.reset_index()
+        df = df.groupby(['trial_id', 'stim_id', 'param_id', 'index']).agg({'sample_n': ['mean', 'std']})
+        
         df.columns = ['_'.join(col).strip() for col in df.columns.values]
         df = df.reset_index()
 
