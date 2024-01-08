@@ -7,7 +7,8 @@ import ipdb
 def populate_dir(args):
     
     # first empty param dir
-    param_path = 'RANCH_cluster/MIT_tools/test_param_dir/'
+    param_path = 'RANCH_cluster/MIT_tools/param_dir/'
+    test_param_path = "RANCH_cluster/MIT_tools/test_param_dir/"
     files = os.listdir(param_path)
 
     for f in files:
@@ -19,6 +20,11 @@ def populate_dir(args):
     # get one row and create csv in param_dir
     for index, row in param_info.iterrows():
         param_info.iloc[[index]].to_csv(param_path + str(index) + '.csv', index=False)
+
+    # populate test dir with 5 random rows
+    for index, row in param_info.sample(n=5).iterrows():
+        param_info.iloc[[index]].to_csv(test_param_path + str(index) + '.csv', index=False)
+        
 
 if __name__ == '__main__':
     print('entered main script')

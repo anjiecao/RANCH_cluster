@@ -72,9 +72,9 @@ def run_trial(param_info, trial_info):
             
 
 
-            if model_type == "EIG":
+            if model_type == "EIG" or model_type == "eig":
                 model = main_sim_tensor.granch_main_simulation(params, tensor_model, s)
-            elif model_type == "KL":
+            elif model_type == "KL" or model_type == "kl":
                 model = proxy_sim.granch_proxy_sim(params, tensor_model, s)
             elif model_type == "surprisal": 
                 model = proxy_sim.granch_proxy_sim(params, tensor_model, s)
