@@ -17,8 +17,6 @@ def read_and_concatenate_pickles(folder_path):
     for file in pickle_files:
         file_path = os.path.join(folder_path, file)
         df = pd.read_pickle(file_path)
-
-        ipdb.set_trace()
         
         # summarize df by taking mean and std of n_samples, while retaining the other columns
         df = df.reset_index()
