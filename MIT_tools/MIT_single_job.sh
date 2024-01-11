@@ -1,10 +1,10 @@
 #!/bin/bash -l
 #SBATCH --mail-type=END
 #SBATCH -n 1 
-#SBATCH --mem=8GB
-#SBATCH --constraint=40GB
+#SBATCH --mem=4GB
+#SBATCH --constraint=30GB
 #SBATCH --gres=gpu:1
-#SBATCH --time=24:00:00
+#SBATCH --time=01:00:00
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
 

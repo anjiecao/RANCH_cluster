@@ -19,7 +19,7 @@ def run_MIT_model(args):
 
     # read trial info
     trials = pd.read_csv(args.trial_info_path)
-    trials = trials.groupby('trial_id').sample(n=3)
+    trials = trials.groupby('trial_id').sample(n=3, replace=True)
     
     for _, row in trials.iterrows():
 
