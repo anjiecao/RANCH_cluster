@@ -9,6 +9,9 @@ def string_to_embedding(trial_info):
    fam = trial_info['fam'] 
    test = trial_info['test']
 
+   print(fam)
+   print(test)
+
 
    # loading the corresponding embedding file
    if embedding_type == "resnet_pa": 
