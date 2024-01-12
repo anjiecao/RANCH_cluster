@@ -24,7 +24,7 @@ def run_MIT_model(args):
     for _, row in trials.iterrows():
 
         # run model
-        run_model.run_trial(param_info = params, trial_info = row)
+        run_model.runs_trial(param_info = params, trial_info = row)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
