@@ -19,12 +19,12 @@ def run_MIT_model(args):
 
     # read trial info
     trials = pd.read_csv(args.trial_info_path)
-    trials = trials.groupby('trial_id').sample(n=3, replace=True)
+    trials = trials.groupby('trial_id').sample(n=20, replace=True)
     
     for _, row in trials.iterrows():
 
         # run model
-        run_model.runs_trial(param_info = params, trial_info = row)
+        run_model.run_trial(param_info = params, trial_info = row)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
