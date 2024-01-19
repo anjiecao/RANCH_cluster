@@ -1,8 +1,8 @@
 #!/bin/bash -l
 #SBATCH --mail-type=END
 #SBATCH -n 1 
-#SBATCH --mem=4GB
-#SBATCH --constraint=30GB
+#SBATCH --mem=2GB
+#SBATCH --constraint=10GB
 #SBATCH --gres=gpu:1
 #SBATCH --time=10:00:00
 #SBATCH --output=%x.%j.out
