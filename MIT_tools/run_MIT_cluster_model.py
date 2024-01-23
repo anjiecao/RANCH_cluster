@@ -16,10 +16,10 @@ def run_MIT_model(args):
 
     # make params from list of values to pandas series with param_names as index
     params = pd.Series(params.values[0], index = param_names)
-
+    
     # read trial info
     trials = pd.read_csv(args.trial_info_path)
-    trials = trials.groupby('trial_id').sample(n=20, replace=True)
+    trials = trials.groupby('trial_id').sample(n=1, replace=True)
     
     for _, row in trials.iterrows():
 
