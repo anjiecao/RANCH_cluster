@@ -2,7 +2,10 @@
 
 project_path="/om2/scratch/tmp/galraz/RANCH/RANCH_cluster"
 
-param_info=$project_path/sim_info/param_info/no_noise_selfpaced.csv
+param_info=$project_path/sim_info/param_info/infants/eig.csv
+trial_info="RANCH_cluster/sim_info/trial_info/infants/trial_info_exposure_duration.csv"
+embedding_info="RANCH_cluster/sim_info/embeddings/infants/resnet_pa.csv"
+
 param_dir=$project_path/MIT_tools/param_dir
 
 # code that takes eig.csv and creates different files for each row
@@ -14,7 +17,7 @@ param_vals=($(find $param_dir/ -type f))
 
 len=$(expr ${#param_vals[@]} - 1) 
 
-cmd="sbatch --array=0-$len $project_path/MIT_tools/MIT_single_job.sh $project_path ${param_vals[@]}" 
+cmd="sbatch --array=0-$len $project_path/MIT_tools/MIT_single_job.sh $project_path ${param_vals[@]} $trial_info $embedding_info" 
 
 $cmd
 

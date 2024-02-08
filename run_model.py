@@ -13,7 +13,7 @@ from RANCH_model.granch_utils import init_stimuli_tensor, init_params_tensor, in
 from RANCH_model.granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
 
 
-def run_trial(param_info, trial_info): 
+def run_trial(param_info, trial_info, embedding_csv): 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     param_info  = param_info.to_dict()
     trial_info = trial_info.to_dict()
@@ -24,7 +24,7 @@ def run_trial(param_info, trial_info):
     all_jitter_grid = get_jitter_grid.generate_jitter_grid(param_info=param_info)
     
     # 2. Convert Stimuli_info into actual embedding 
-    fam, test = get_embedding.string_to_embedding(trial_info=trial_info)
+    fam, test = get_embedding.string_to_embedding(trial_info=trial_info, embedding_csv=embedding_csv)
     
     # 3. Convert trial information into sequence
     sequence_scheme = get_sequence.param_to_scheme(trial_info=trial_info)

@@ -20,15 +20,19 @@ def run_MIT_model(args):
     # read trial info
     trials = pd.read_csv(args.trial_info_path)
     trials = trials.groupby('trial_id').sample(n=1, replace=True)
+
+    # pass through embeddings csv path
+    embeddings = args.embedding_info_path
     
     for _, row in trials.iterrows():
 
         # run model
-        run_model.run_trial(param_info = params, trial_info = row)
+        run_model.run_trial(param_info = params, trial_info = row, embeddings = embeddings)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("param_info_path", type=str, help="Path to csv with parameters")
     parser.add_argument("trial_info_path", type=str, help="Path to trial_info csv")
+    parser.add_argument("embedding_info_path", type=str, help="Path to embeddings csv")
     args = parser.parse_args()    
     run_MIT_model(args)
