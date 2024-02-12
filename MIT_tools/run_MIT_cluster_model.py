@@ -19,7 +19,8 @@ def run_MIT_model(args):
     
     # read trial info
     trials = pd.read_csv(args.trial_info_path)
-    trials = trials.groupby('trial_id').sample(n=1, replace=True)
+    
+    trials = trials.groupby('trial_id').sample(n=20, replace=True)
 
     # pass through embeddings csv path
     embeddings = args.embedding_info_path

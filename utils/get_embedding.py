@@ -31,7 +31,7 @@ def string_to_embedding_old(trial_info):
 
    return (f_val, t_val)
 
-def string_to_embedding(trial_info, embedding_csv): 
+def string_to_embedding(trial_info, embeddings): 
    
    # loading all the key information
    feature_n = trial_info["feature_n"]
@@ -40,7 +40,7 @@ def string_to_embedding(trial_info, embedding_csv):
 
    print(fam)
    print(test)
-   embeddings = pd.read_csv(embedding_csv, header=None)
+   embeddings = pd.read_csv(embeddings, header=None)
 
    fam_raw = embeddings[embeddings.iloc[:,0] == fam]
    test_raw =  embeddings[embeddings.iloc[:,0] == test]

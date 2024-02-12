@@ -13,7 +13,7 @@ from RANCH_model.granch_utils import init_stimuli_tensor, init_params_tensor, in
 from RANCH_model.granch_utils import main_sim_tensor, proxy_sim, lesioned_sim
 
 
-def run_trial(param_info, trial_info, embedding_csv): 
+def run_trial(param_info, trial_info, embeddings): 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     param_info  = param_info.to_dict()
     trial_info = trial_info.to_dict()
@@ -24,7 +24,7 @@ def run_trial(param_info, trial_info, embedding_csv):
     all_jitter_grid = get_jitter_grid.generate_jitter_grid(param_info=param_info)
     
     # 2. Convert Stimuli_info into actual embedding 
-    fam, test = get_embedding.string_to_embedding(trial_info=trial_info, embedding_csv=embedding_csv)
+    fam, test = get_embedding.string_to_embedding(trial_info=trial_info, embeddings=embeddings)
     
     # 3. Convert trial information into sequence
     sequence_scheme = get_sequence.param_to_scheme(trial_info=trial_info)
@@ -97,7 +97,7 @@ def run_trial(param_info, trial_info, embedding_csv):
         curr_time = datetime.now()
         timestr = curr_time.strftime('%m-%d-%H:%M:%S.%f')[:-3] 
         
-        batch_name = "RANCH_cluster/cache_results_nonoise/{t}.pickle".format(t = timestr)
+        batch_name = "RANCH_cluster/cache_results/{t}.pickle".format(t = timestr)
         with open(batch_name, 'wb') as f:
             pickle.dump(res_df, f)
         del res_df

@@ -9,9 +9,13 @@
 #SBATCH --error=%x.%j.err
 
 project_path=$1
-params=("${@:2}")
-trial_info=$3
-embedding_info=$4
+trial_info=("${@:2}")
+embedding_info=("${@:3}")
+params=("${@:4}")
+
+echo $trial_info
+echo $embedding_info
+echo $params
 
 current_param_values=${params[${SLURM_ARRAY_TASK_ID}]}
 
