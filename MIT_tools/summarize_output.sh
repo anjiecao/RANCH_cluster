@@ -6,8 +6,8 @@
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
 
-input_path="RANCH_cluster/cache_results_infants_2x_exp"
-output_path="RANCH_cluster/summarized_output_infants_2x.csv"
+input_path="RANCH_cluster/cache_results_infants"
+output_path="RANCH_cluster/summarized_output_infants_unscaled.csv"
 cmd="python -m RANCH_cluster.summarize_output $input_path $output_path"
 
 echo $cmd 
