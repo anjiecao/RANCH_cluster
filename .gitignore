@@ -151,6 +151,8 @@ cython_debug/
 # remove all the pickle file
 /cache_results/*
 
+/cache_results*
+
 /MIT_tools/param_dir/*
 
 # PyCharm
