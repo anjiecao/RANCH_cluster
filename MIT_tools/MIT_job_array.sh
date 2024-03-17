@@ -2,9 +2,9 @@
 
 project_path="/om2/scratch/tmp/galraz/RANCH/RANCH_cluster"
 
-param_info=$project_path/sim_info/param_info/infants/eig.csv
+param_info=$project_path/sim_info/param_info/infants/no_noise.csv
 trial_info="RANCH_cluster/sim_info/trial_info/exposure_duration/infants/trial_info.csv"
-embedding_info="RANCH_cluster/sim_info/embeddings/resnet_pa.csv"
+embedding_info="RANCH_cluster/sim_info/embeddings/resnet50.csv"
 
 param_dir=$project_path/MIT_tools/param_dir
 
