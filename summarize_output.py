@@ -3,7 +3,7 @@ import os
 import ipdb
 import argparse 
 
-def read_and_concatenate_pickles(folder_path):
+def read_and_concatenate_pickles(folder_path, output_path):
     # List all files in the folder
     all_files = os.listdir(folder_path)
 
@@ -14,7 +14,7 @@ def read_and_concatenate_pickles(folder_path):
     df_list = []
 
     # Loop through the pickle files and read each into a DataFrame
-    for file in pickle_files:
+    for idx, file in enumerate(pickle_files):
         file_path = os.path.join(folder_path, file)
         df = pd.read_pickle(file_path)
         
@@ -25,11 +25,18 @@ def read_and_concatenate_pickles(folder_path):
 
         df.columns = ['_'.join(col).strip() for col in df.columns.values]
         df = df.reset_index()
-
         df_list.append(df)
 
-    # Concatenate all DataFrames into one
-    concatenated_df = pd.concat(df_list, ignore_index=True)
+        if idx % 200 == 0:
+            print(f"Processed {idx} files")
+            concatenated_df = pd.concat(df_list, ignore_index=True)
+            if not os.path.isfile(output_path):
+                concatenated_df.to_csv(output_path, header = 'column_names', index = False)
+            else: # else it exists so append without writing the header
+                concatenated_df.to_csv(output_path, index=False, mode='a', header=False)
+           
+            df_list = []
+    
 
     return concatenated_df
 
@@ -38,5 +45,5 @@ if __name__ == '__main__':
     parser.add_argument("input_folder_path", type=str, help="Path to sim results")
     parser.add_argument("output_path", type=str, help="Path to sim results")
     args = parser.parse_args()    
-    result_df = read_and_concatenate_pickles(args.input_folder_path)
-    result_df.to_csv(args.output_path, index=False)
+    result_df = read_and_concatenate_pickles(args.input_folder_path, args.output_path)
+    
