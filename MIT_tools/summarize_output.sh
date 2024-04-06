@@ -7,7 +7,7 @@
 #SBATCH --error=%x.%j.err
 
 input_path="RANCH_cluster/cache_results"
-output_path="RANCH_cluster/summarized_output_adults_surprisal_resnet50.csv"
+output_path="RANCH_cluster/summarized_output_infants_surprisal_resnet50_smaller_noise.csv"
 cmd="python -m RANCH_cluster.summarize_output $input_path $output_path"
 
 echo $cmd 

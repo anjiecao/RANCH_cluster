@@ -19,11 +19,11 @@ def populate_dir(args):
 
     # get one row and create csv in param_dir
     for index, row in param_info.iterrows():
-        #if index in [3, 6, 30, 33, 36, 39, 42, 45, 48, 51, 52, 54, 55, 57, 58, 60, 64, 138, 147, 148, 151, 153, 168, 199, 201]:
-        param_info.iloc[[index]].to_csv(param_path + str(index) + '.csv', index=False)
+        if index in [2,4,5,6,7,8,9,16,17,18,20,21,22,24,26,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,138,160]:
+            param_info.iloc[[index]].to_csv(param_path + str(index) + '.csv', index=False)
 
     # populate test dir with 3 random rows
-    for index, row in param_info.sample(n=3).iterrows():
+    for index, row in param_info.sample(n=0).iterrows():
         param_info.iloc[[index]].to_csv(test_param_path + str(index) + '.csv', index=False)
         
 
