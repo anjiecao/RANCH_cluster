@@ -27,6 +27,7 @@ def run_MIT_model(args):
     
     for _, row in trials.iterrows():
 
+        print(row['trial_id'])
         # run model
         run_model.run_trial(param_info = params, trial_info = row, embeddings = embeddings)
 

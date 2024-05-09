@@ -11,32 +11,35 @@ def read_and_concatenate_pickles(folder_path, output_path):
     pickle_files = [f for f in all_files if f.endswith('.pickle')]
 
     # Initialize an empty list to store DataFrames
-    df_list = []
+    df_list = []  # Initialize the list to store data frames
 
-    # Loop through the pickle files and read each into a DataFrame
     for idx, file in enumerate(pickle_files):
         file_path = os.path.join(folder_path, file)
         df = pd.read_pickle(file_path)
         
-        # summarize df by taking mean and std of n_samples, while retaining the other columns
+        # Reset index and perform group by operation
         df = df.reset_index()
-
         df = df.groupby(['trial_id', 'stim_id', 'param_id', 'index']).agg({'sample_n': ['mean', 'std']})
-
-        df.columns = ['_'.join(col).strip() for col in df.columns.values]
+        df.columns = ['_'.join(col).strip() for col in df.columns.values]  # Flatten the column headers
         df = df.reset_index()
         df_list.append(df)
 
-        if idx % 200 == 0:
-            print(f"Processed {idx} files")
+        if (idx + 1) % 200 == 0:  # Check if the current index + 1 is divisible by 200
+            print(f"Processed {idx + 1} files")
             concatenated_df = pd.concat(df_list, ignore_index=True)
             if not os.path.isfile(output_path):
-                concatenated_df.to_csv(output_path, header = 'column_names', index = False)
-            else: # else it exists so append without writing the header
+                concatenated_df.to_csv(output_path, header='column_names', index=False)
+            else:
                 concatenated_df.to_csv(output_path, index=False, mode='a', header=False)
-           
-            df_list = []
-    
+            df_list = []  # Reset the list after writing to file
+
+    # After the loop, check if there are any remaining data frames to write to the file
+    if df_list:
+        concatenated_df = pd.concat(df_list, ignore_index=True)
+        if not os.path.isfile(output_path):
+            concatenated_df.to_csv(output_path, header='column_names', index=False)
+        else:
+            concatenated_df.to_csv(output_path, index=False, mode='a', header=False)
 
     return concatenated_df
 

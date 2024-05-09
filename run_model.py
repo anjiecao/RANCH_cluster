@@ -97,7 +97,7 @@ def run_trial(param_info, trial_info, embeddings):
         curr_time = datetime.now()
         timestr = curr_time.strftime('%m-%d-%H:%M:%S.%f')[:-3] 
         
-        batch_name = "RANCH_cluster/cache_results/{t}.pickle".format(t = timestr)
+        batch_name = "RANCH_cluster/cache_results_downscaled_infants/{t}.pickle".format(t = timestr)
         with open(batch_name, 'wb') as f:
             pickle.dump(res_df, f)
         del res_df
